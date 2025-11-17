@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  event-service:
+    build: .
+    container_name: event-service
+    restart: always
+    depends_on:
+      - event-db
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@event-db:5432/events_db
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+
+  event-db:
+    image: postgres:15
+    container_name: event-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: events_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - event_db_data:/var/lib/postgresql/data
+
+# -------------------------------------------------------
+#  auth-service:
+
+#  auth-db:
+
+#  report-service:
+
+#  report-db:
+# -------------------------------------------------------
+
+volumes:
+  event_db_data:

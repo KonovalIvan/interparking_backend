@@ -1,0 +1,106 @@
+# =====================
+# Python
+# =====================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.manifest
+*.spec
+
+# =====================
+# Virtual environments
+# =====================
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# =====================
+# IDE / editors
+# =====================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.vscode/
+
+# =====================
+# Pytest / coverage
+# =====================
+.pytest_cache/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+htmlcov/
+
+# =====================
+# MyPy / type checking
+# =====================
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# =====================
+# Logs
+# =====================
+*.log
+logs/
+*.out
+*.err
+
+# =====================
+# Database / local files
+# =====================
+*.sqlite3
+*.db
+*.db-journal
+*.sqlite
+
+# =====================
+# Docker
+# =====================
+*.dockerfile
+*.env
+docker-compose.override.yml
+docker-compose.override.yaml
+**/Dockerfile
+**/docker-compose*.yml
+
+# =====================
+# Misc
+# =====================
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+*.bak
+*.orig
+*.tmp
+*.DS_Store
+Thumbs.db
+
+# =====================
+# Alembic migrations cache
+# =====================
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+__pycache__/
+*.sqlite
+*.sqlite3
