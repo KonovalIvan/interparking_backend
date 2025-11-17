@@ -1,18 +1,26 @@
 version: "3.9"
 
 services:
+  gateway:
+    build: ./gateway
+    container_name: gateway
+    restart: always
+    ports:
+      - "8000:8000"
+
   event-service:
-    build: .
+    build: ./event-service
     container_name: event-service
     restart: always
     depends_on:
       - event-db
-    environment:
-      DATABASE_URL: postgresql+asyncpg://postgres:postgres@event-db:5432/events_db
+    env_file:
+      - .env
+    command: sh -c "alembic -c alembic.ini upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
     ports:
-      - "8000:8000"
+      - "8001:8000"
     volumes:
-      - .:/app
+      - ./event-service:/app
 
   event-db:
     image: postgres:15
@@ -22,20 +30,34 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: events_db
-    ports:
-      - "5432:5432"
     volumes:
       - event_db_data:/var/lib/postgresql/data
 
-# -------------------------------------------------------
-#  auth-service:
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+    restart: always
+    depends_on:
+      - auth-db
+    env_file:
+      - .env
+    command: sh -c "alembic -c alembic.ini upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./auth-service:/app
 
-#  auth-db:
-
-#  report-service:
-
-#  report-db:
-# -------------------------------------------------------
+  auth-db:
+    image: postgres:15
+    container_name: auth-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: auth_db
+    volumes:
+      - auth_db_data:/var/lib/postgresql/data
 
 volumes:
   event_db_data:
+  auth_db_data:
