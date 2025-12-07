@@ -7,6 +7,9 @@ services:
 #    restart: always
     ports:
       - "8000:8000"
+    depends_on:
+      - auth-service
+      - event-service
 
   event-service:
     build: ./event-service
