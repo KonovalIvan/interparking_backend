@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 import os
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+asyncpg://postgres:postgres@localhost:5432/events_db")
+DATABASE_URL = "postgresql+asyncpg://postgres:postgres@event-db:5433/events_db"
 
 engine = create_async_engine(DATABASE_URL, echo=False)
 

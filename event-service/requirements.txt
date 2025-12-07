@@ -5,3 +5,5 @@ sqlalchemy
 asyncpg
 python-jose
 alembic
+dotenv
+psycopg2-binary
